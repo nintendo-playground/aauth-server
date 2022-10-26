@@ -1,0 +1,17 @@
+
+<!doctype html>
+<html>
+	<body style="margin: 50px">
+		<h1>AAuth dashboard</h1>
+		
+		{% for error in get_flashed_messages() %}
+			<span style="color: red">{{ error }}</span><br>
+		{% endfor %}
+		
+		<form method="post" style="font-family: monospace">
+			Username: <input type="text" name="username"><br>
+			Password: <input type="password" name="password"><br>
+			<input type="submit" value="Log in">
+		</form>
+	</body>
+</html>

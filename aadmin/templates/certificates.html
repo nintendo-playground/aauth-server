@@ -1,0 +1,18 @@
+
+<!doctype html>
+<html>
+	<body style="margin: 50px">
+		<h1>
+			<a style="text-decoration: none; color: black" href="/admin">AAuth dashboard</a>
+		</h1>
+		
+		<form method="post" style="font-family: monospace" enctype="multipart/form-data">
+			Key generation: <input type="number" name="keygen" min="0" max="100"><br>
+			Flags: <input type="number" name="flags" min="0" max="255"><br>
+			Device id: <input type="text" name="device_id" pattern="[A-Fa-f\d]{16}"><br>
+			Title id: <input type="text" name="title_id" pattern="[A-Fa-f\d]{16}"><br>
+			Account id: <input type="text" name="account_id" value="00000000" pattern="[A-Fa-f\d]{8}"><br>
+			<input type="submit" value="Generate">
+		</form>
+	</body>
+</html>

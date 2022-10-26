@@ -1,0 +1,44 @@
+
+version: "3"
+services:
+  job:
+    build: job
+    restart: always
+    volumes:
+      - ./instance:/app/instance
+  
+  aadmin:
+    build: aadmin
+    restart: always
+    ports:
+      - 127.0.0.1:${AADMIN_PORT}:8000
+    volumes:
+      - ./common:/app/common:ro
+      - ./instance:/app/instance
+    environment:
+      - USERNAME=${AADMIN_USERNAME}
+      - PASSWORD=${AADMIN_PASSWORD}
+      - SECRET_KEY=${AADMIN_SECRET_KEY}
+  
+  aauth:
+    build: aauth
+    restart: always
+    ports:
+      - 127.0.0.1:${AAUTH_PORT}:8000
+    volumes:
+      - ./common:/app/common:ro
+      - ./instance:/app/instance:ro
+    environment:
+      - DAUTH_ISS=${DAUTH_ISS}
+      - DAUTH_JKU=${DAUTH_JKU}
+      - AAUTH_ISS=${AAUTH_ISS}
+      - AAUTH_JKU=${AAUTH_JKU}
+
+  acert:
+    image: nginx:latest
+    restart: always
+    ports:
+      - 127.0.0.1:${ACERT_PORT}:80
+    volumes:
+      - ./instance/public:/app/instance:ro
+      - ./acert/nginx.conf:/etc/nginx/nginx.conf
