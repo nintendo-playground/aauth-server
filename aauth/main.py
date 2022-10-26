@@ -111,8 +111,8 @@ def is_banned(rom_id):
 
 def verify_digital(app, token, cert, cert_key):
 	try:
-		cert = base64.b64decode(cert + b"==", b"-_")
-		cert_key = base64.b64decode(cert_key + b"==", b"-_")
+		cert = base64.b64decode(cert + "==", "-_")
+		cert_key = base64.b64decode(cert_key + "==", "-_")
 		
 		rsa = PKCS1_OAEP.new(RSA_PRIVATE_KEY, SHA256)
 		key = rsa.decrypt(cert_key)
@@ -222,7 +222,7 @@ def application_auth_token(version):
 		}
 	}
 	
-	if app.flags & db.ApplicationFlags.SYSTEM_TITLE:
+	if app.system_title:
 		payload["nintendo"]["di"] = info["sub"]
 		payload["nintendo"]["sn"] = info["nintendo"]["sn"]
 		payload["nintendo"]["pc"] = info["nintendo"]["pc"]
